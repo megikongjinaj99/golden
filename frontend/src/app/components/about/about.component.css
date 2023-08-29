@@ -1,0 +1,16 @@
+.main{
+  text-align: center;
+  padding: 30px 0;
+
+  }
+  .paragrafi{
+    background-color: lightgrey;
+    width: 1000px;
+    border: 8px solid rgb(62, 129, 126);
+    padding: 50px;
+    margin: 30px;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+
+  }

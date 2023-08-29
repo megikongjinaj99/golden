@@ -1,0 +1,10 @@
+cd backend
+./mvnw package && java -jar target/GoldenSpace-0.0.1-SNAPSHOT.jar
+docker build --tag=auctions-backend:latest .
+cd frontend
+ng build --prod
+docker build --tag=auctions-frontend:latest .
+cd backend
+docker run -p 8081:8081 auctions-backend:latest
+cd frontend
+docker run -p 80:80 auctions-frontend:latest

@@ -1,0 +1,74 @@
+<div class="container container-fluid mt-5">
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#!">Categories</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="javascript:void(0)" (click)="filter(null)">All <span class="sr-only">(current)</span></a>
+              </li>
+              <li *ngFor="let category of categories"  class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="filter(category)">{{category.categoryName}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <input #myInput [(ngModel)]="query" placeholder="Search for auctions"  aria-label="Search" class="form-control"
+        (keyup.enter)="filter(null)" >
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="col-12 text-center" *ngIf="loader">
+      <div class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="col-12">
+      <ngb-alert [dismissible]="false" *ngIf="!auctions || auctions.length < 1 && !loader">
+         There are no auctions!.
+      </ngb-alert>
+    </div>
+    <div *ngFor="let auction of auctions" class="col-4 my-5">
+
+      <div class="card h-100">
+        <!-- Product image-->
+        <a routerLink="/auctions/detail/{{auction.id}}">
+          <img class="card-img-top" src="{{auction.imageUrl}}" alt="..." />
+        </a>
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <a routerLink="/auctions/{{auction.id}}">
+              <h5 class="fw-bolder">{{ auction.name}}</h5>
+            </a>
+            <h5 class="fw-normal">{{auction.description}}</h5>
+            <!-- Product price-->
+            Current Price: {{ auction.currentPrice | currency:'USD'}} | Starting Price: {{ auction.initialPrice|
+            currency:'USD'}}
+          </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <a button class="btn btn-outline-dark" (click)="takePart(auction)"
+            routerLink="/auctions/{{auction.id}}">Join</a>
+
+          <a button class="btn btn-outline-dark" routerLink="/auctions/{{auction.id}}">Watch </a>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
+            (pageChange)="listAuctions()"></ngb-pagination>
+        </ul>
+      </nav>
+    </div> -->
+  </div>
+
+</div>

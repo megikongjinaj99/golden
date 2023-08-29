@@ -1,0 +1,105 @@
+<div class="container px-4 px-lg-5 mt-5">
+
+
+  <h1>Auctions by category</h1>
+  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+    <div *ngFor="let auction of auctions" class="col mb-5">
+
+      <div class="card h-100">
+        <!-- Product image-->
+        <a routerLink="/auctions/{{auction.id}}">
+          <img class="card-img-top" src="{{auction.imageUrl}}" alt="..." />
+        </a>
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <a routerLink="/auctions/{{auction.id}}">
+              <h5 class="fw-bolder">{{ auction.name}}</h5>
+            </a>
+            <h5 class="fw-normal">{{auction.description}}</h5>
+            <!-- Product price-->
+            Current Price: {{ auction.currentPrice | currency:'USD'}} | Starting Price: {{ auction.initialPrice|
+            currency:'USD'}}
+          </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <a button class="btn btn-outline-dark" (click)="takePart(auction)"
+            routerLink="/auctions/{{auction.id}}">Join</a>
+
+          <a button class="btn btn-outline-dark" routerLink="/auctions/{{auction.id}}">Watch </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- pagination -->
+
+  <div>
+    <!-- message if no auctions are found -->
+    <div *ngIf="auctions.length === 0" class="col-12 text-center">
+      <h3>No Auctions found</h3>
+    </div>
+
+  </div>
+
+
+
+<div class="col-12">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
+        (pageChange)="listAuctions()"></ngb-pagination>
+    </ul>
+  </nav>
+</div>
+
+  <app-ad4news></app-ad4news>
+
+  <h1>Active Auctions</h1>
+  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+    <div *ngFor="let auction of activeAuctions" class="col mb-5">
+
+      <div class="card h-100">
+        <!-- Product image-->
+        <a routerLink="/auctions/{{auction.id}}">
+          <img class="card-img-top" src="{{auction.imageUrl}}" alt="..." />
+        </a>
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <a routerLink="/auctions/{{auction.id}}">
+              <h5 class="fw-bolder">{{ auction.name}}</h5>
+            </a>
+            <h5 class="fw-normal">{{auction.description}}</h5>
+            <!-- Product price-->
+            Current Price: {{ auction.currentPrice | currency:'USD'}} <br>
+            Starting Price: {{ auction.initialPrice| currency: 'USD'}
+            <br>
+            Ending Date: {{auction.endDate| date}}
+          </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <a button class="btn btn-outline-dark" (click)="takePart(auction)"
+            routerLink="/auctions/{{auction.id}}">Join</a>
+
+          <a button class="btn btn-outline-dark" routerLink="/auctions/{{auction.id}}">Watch </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- pagination -->
+
+  <div>
+    <!-- message if no auctions are found -->
+    <div *ngIf="auctions.length === 0" class="col-12 text-center">
+      <h3>No auctions found</h3>
+    </div>
+
+  </div>
+</div>
+<app-add-auction></app-add-auction>

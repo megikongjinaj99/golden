@@ -1,0 +1,39 @@
+<h1>Finished Auctions</h1>
+  <div class="row">
+    <div class="col-12">
+      <ngb-alert [dismissible]="false" *ngIf="!finishedAuctions || finishedAuctions.length < 1">
+         There are no finished auctions.
+      </ngb-alert>
+    </div>
+    <div *ngFor="let auction of finishedAuctions" class="col-3 mb-5">
+
+      <div class="card h-100">
+        <!-- Product image-->
+        <a routerLink="/auctions/detail/{{auction.id}}">
+          <img class="card-img-top" src="{{auction.imageUrl}}" alt="..." />
+        </a>
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <a routerLink="/auctions/detail/{{auction.id}}">
+              <h5 class="fw-bolder">{{ auction.name}}</h5>
+            </a>
+            <h5 class="fw-normal">{{auction.description}}</h5>
+            <!-- Product price-->
+            Current Price: {{ auction.currentPrice | currency:'USD'}} <br>
+            Starting Price: {{ auction.initialPrice| currency: 'USD'}}
+            <br>
+            Ending Date: {{auction.endDate| date}}
+          </div>
+        </div>
+        <!-- Product actions
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <a button class="btn btn-outline-dark" (click)="takePart(auction)"
+            routerLink="/auctions/{{auction.id}}">Join</a> -->
+
+          <a button class="btn btn-outline-dark" routerLink="/auctions/detail/{{auction.id}}">Watch </a>
+        </div>
+      </div>
+    </div>
+

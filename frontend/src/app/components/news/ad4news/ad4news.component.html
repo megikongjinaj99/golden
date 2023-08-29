@@ -1,0 +1,16 @@
+
+<div class="container">
+  <div class="row">
+    <h1>Latest News</h1>
+<div *ngFor="let news of (newsList | slice:newsList.length - 4);" class="card" style="width: 18rem;">
+  <img src="{{news.imageUrl}}" class="card-img-top" alt="{{news.title}}">
+  <div class="card-body">
+    <h5 class="card-title">Title: {{news.title}}</h5>
+    <p class="card-text">Author: {{news.author}}</p>
+    <p class="card-text">Date created {{news.createTime| date}}</p>
+    <a class="btn btn-primary" routerLink="/news/{{news.id}}" >Read</a>
+  </div>
+</div>
+</div>
+</div>
+<!--add news form -->

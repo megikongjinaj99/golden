@@ -1,0 +1,61 @@
+
+<div class="col d-grid">
+  <div>
+
+    <button class="btn btn-outline-warning bg-dark" (click)="open(content)">
+      <i id="bid-icon" class="fa fa-dollar"></i> add News</button>
+  </div>
+
+  <div class="col d-grid">
+    <a class="btn btn-outline-dark mt-auto" routerLink="/news/">Back to news</a>
+  </div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add News</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="news-title">Title</label>
+        <input type="text" class="form-control" id="news-title" placeholder="Enter News Title"
+          [(ngModel)]="news.title">
+      </div>
+      <div class="form-group">
+        <label for="news-content">Content</label>
+        <input type="text" class="form-control" id="news-content" placeholder="Enter news content"
+          [(ngModel)]="news.content">
+      </div>
+      <div class="form-group">
+        <label for="news-author">Author</label>
+        <input type="text" class="form-control" id="news-author" placeholder="Enter news author"
+          [(ngModel)]="news.author">
+      </div>
+      <div class="form-group">
+        <label for="news-date">News created date</label>
+        <input type="date" class="form-control" id="news-date" placeholder="Enter news date"
+          [(ngModel)]="news.createTime">
+      </div>
+
+      <!--upload image base 64-->
+      <div class="form-group">
+        <label for="news-image">News image</label>
+        <input type="file" class="form-control" id="news-image"
+          (change)="uploadImage($event)" #fileInput>
+      </div>
+
+      <div class="form-group">
+        <label for="news-image">news image</label>
+        <img class="img-thumbnail" [src]="news.imageUrl" />
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark" (click)="addNews(news)">Save changes</button>
+    </div>
+  </ng-template>

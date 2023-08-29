@@ -1,0 +1,79 @@
+<div class="col d-grid">
+  <div>
+
+    <button class="btn btn-outline-warning bg-dark" (click)="open(content)">
+      <i id="bid-icon" class="fa fa-dollar"></i> add Auction</button>
+  </div>
+
+  <div class="col d-grid">
+    <a class="btn btn-outline-dark mt-auto" routerLink="/auctions/">Back to auctions</a>
+  </div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add bid</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="auction-name">Auction name</label>
+        <input type="text" class="form-control" id="auction-name" placeholder="Enter auction name"
+          [(ngModel)]="auctionDto.name">
+      </div>
+      <div class="form-group">
+        <label for="auction-description">Auction description</label>
+        <input type="text" class="form-control" id="auction-description" placeholder="Enter auction description"
+          [(ngModel)]="auctionDto.description">
+      </div>
+      <div class="form-group">
+        <label for="auction-initial-price">Auction initial price</label>
+        <input type="number" class="form-control" id="auction-initial-price" placeholder="Enter auction initial price"
+          [(ngModel)]="auctionDto.initialPrice">
+      </div>
+      <div class="form-group">
+        <label for="auction-start-date">Auction start date</label>
+        <input type="date" class="form-control" id="auction-start-date" placeholder="Enter auction start date"
+          [(ngModel)]="auctionDto.startDate">
+      </div>
+      <div class="form-group">
+        <label for="auction-end-date">Auction end date</label>
+        <input type="date" class="form-control" id="auction-end-date" placeholder="Enter auction end date"
+          [(ngModel)]="auctionDto.endDate">
+      </div>
+      <div class="form-group">
+        <label for="auction-image">Auction image</label>
+        <input type="text" class="form-control" id="auction-image" placeholder="Enter auction image"
+          [(ngModel)]="auctionDto.imageUrl">
+      </div>
+
+      <!--upload image base 64-->
+      <div class="form-group">
+        <label for="auction-image">Auction image</label>
+        <input type="file" class="form-control" id="auction-image"
+          (change)="uploadImage($event)" #fileInput>
+      </div>
+
+      <div class="form-group">
+        <label for="auction-image">Auction image</label>
+        <img class="img-thumbnail" [src]="auctionDto.imageUrl" />
+      </div>
+
+
+
+      <!-- check list of categories-->
+      <div class="form-group">
+        <label for="auction-category">Auction Category</label>
+        <select class="form-control" id="auction-category" [(ngModel)]="auctionDto.categoryId">
+          <option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark" (click)="addAuction(auctionDto)">Save changes</button>
+    </div>
+  </ng-template>
+
